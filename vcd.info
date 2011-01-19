@@ -1,0 +1,7 @@
+name = "Views Context Displays"
+dependencies[] = "context"
+dependencies[] = "views"
+dependencies[] = "ds"
+description = "Example module"
+package = "Display Suite"
+core = "6.x"
