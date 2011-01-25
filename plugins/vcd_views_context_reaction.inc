@@ -11,8 +11,7 @@ class vcd_views_context_reaction extends context_reaction {
     return array('debug' => 1);
   }
 	
-  function execute(&$vars) {
-    $vars['options']['build_mode'] = 'teaser';
-	  $contexts = context_active_contexts();
+  function execute(&$options, $build_mode) {
+    $options['build_mode'] = $build_mode;
   }
 }

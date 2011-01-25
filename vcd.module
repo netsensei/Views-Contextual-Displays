@@ -1,4 +1,5 @@
 <?php
+//$Id$
 
 /**
  * Implements hook_views_api().
@@ -10,6 +11,9 @@ function vcd_views_api() {
   );
 }
 
+/**
+ * Implements hook_context_plugins().
+ */
 function vcd_context_plugins() {
   $plugins = array();
   $plugins['vcd_views_context_reaction'] = array(
@@ -23,6 +27,9 @@ function vcd_context_plugins() {
   return $plugins;
 }
 
+/**
+ * Implements hook_context_registry().
+ */
 function vcd_context_registry() {
   return array(
     'reactions' => array(
@@ -32,7 +39,4 @@ function vcd_context_registry() {
       ),
     ),
   );
-}
-
-function vcd_preprocess_page(&$vars) {
 }

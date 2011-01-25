@@ -6,14 +6,23 @@
  * which every module implementing the ds_api should define.
  */
 function template_preprocess_vcd_row_object(&$vars) {
-  if ($plugin = context_get_plugin('reaction', 'vcd_views_context_reaction')) {
-    $plugin->execute($vars);
-  }
-
   $options = $vars['options'];
   $vars['object'] = '';
   $vars['data_object'] = '';
 
+  if ($plugin = context_get_plugin('reaction', 'vcd_views_context_reaction')) {
+    // We need to call all contextual conditions here. Context module invokes them through
+    // context_page_alter() which is after Views' preprocess functions have been called.
+    // This is not necessarily bad because Context loads them in a static cached object.
+    module_invoke_all('context_page_condition');
+    foreach (context_active_contexts() as $key => $context) {
+      // When multiple contexts are active, only the last active context will set the build mode
+      if (in_array('context_' . $key, array_keys($options))) {
+        $plugin->execute($options, $options['context_' . $key]);
+      }
+    }
+  }
+  
   // The advanced selector searches for a function called
   // ds_views_row_adv_VIEWSNAME.
   if ($options['advanced']) {

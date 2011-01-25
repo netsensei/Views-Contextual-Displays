@@ -8,8 +8,8 @@ function vcd_views_plugins() {
   $plugins = array(
 	  'row' => array(
 		  'vcd' => array(
-				'title' => t('Krimson fields'),
-				'help' => t('Displays the fields with an optional template.'),
+				'title' => t('VCD Object'),
+				'help' => t('Displays the object with a contextual build mode'),
 				'handler' => 'views_plugin_row_vcd',
         'path' => $path . '/views', // not necessary for most 
         'parent' => 'ds',
