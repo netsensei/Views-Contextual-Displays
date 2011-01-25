@@ -1,5 +1,11 @@
 <?php
-//$Id$
+// $Id$
+
+/**
+ * @file
+ * This is the base module for Views Context Displays
+ * This module allows Views to use contextaware DS controlled build modes.
+ */
 
 /**
  * Implements hook_views_api().

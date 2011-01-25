@@ -1,16 +1,16 @@
 <?php
-// $Id:$
+// $Id$
 
 /**
  * @file
- * Contains the base row style plugin.
+ * Contains the VCD Object row style plugin.
  */
 
 /**
  * The VCD row plugin. It extends the DS Object row plugin
  *
- * This plugin adds one extra option to the DS row plugin and allows for the use
- * of a contextual based build mode switching.
+ * This plugin adds one extra fields to the DS Object row plugin and allows for
+ * contextual based build mode switching.
  *
  * @ingroup views_row_plugins
  */
@@ -21,8 +21,10 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
   }
 
   function options_form(&$form, &$form_state) {
+    // @todo We load the original DS options but these are not fully functional (yet)
     parent::options_form(&$form, &$form_state);
-    
+
+    // Load all available build modes for this view
     $views_base_table = $this->view->base_table;
     $build_mode_options = array();
     $build_modes = ds_get_build_modes();
@@ -37,7 +39,7 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
       }
     }
 
-    // Select the contextual build mode.
+    // Set an extra fieldset
     $form['context_fieldset'] = array(
       '#type' => 'fieldset',
       '#title' => t('Contextual build modes'),
@@ -45,6 +47,7 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
       '#collapsed' => TRUE,
     );
     
+    // List all enabled contexts that load the vcd_views_context_reaction plugin
     $contexts = context_enabled_contexts();
     $contexts_values = array();
     foreach ($contexts as $name => $context) {
@@ -53,14 +56,17 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
         $conditions = array_keys($context->conditions);
         $form['context_fieldset']['context_' . $name] = array(
           '#type' => 'select',
-          '#title' => t('Set buildmode for %s', array('%s' => $name)),
+          '#title' => t('Set buildmode for context %s', array('%s' => $name)),
           '#options' => $build_mode_options,
           '#description' => t('Condtions: %s, Reactions: %e', array('%s' => implode(', ', $conditions), '%e' => implode(' ,', $reactions))),
         );
       }
     }
 	}
-	
+
+  /**
+   * Reset all fieldsets except for changing.
+   */
 	function options_submit($form, &$form_state) {
     foreach ($form_state['values']['row_options']['context_fieldset'] as $context => $buildmode) {
       $form_state['values']['row_options'][$context] = $buildmode;

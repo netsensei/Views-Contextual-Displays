@@ -1,4 +1,10 @@
 <?php
+// $Id$
+
+/**
+ * @file
+ * Theming functions for vcd
+ */
 
 /**
  * Template preprocess function for theme_views_view_row_object().

@@ -1,6 +1,8 @@
 <?php
+//$Id$
+
 /**
  * @file
- * DS display node mode row.
+ * VCD display node mode row.
  */
 print $data_object;
