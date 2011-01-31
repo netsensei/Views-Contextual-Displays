@@ -67,6 +67,7 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
           '#title' => t('Set buildmode for context %s', array('%s' => $name)),
           '#options' => $build_mode_options,
           '#description' => t('Condtions: %s, Reactions: %e', array('%s' => implode(', ', $conditions), '%e' => implode(' ,', $reactions))),
+          '#default_value' => $this->options['context_fieldset']['context_' . $name],
         );
       }
     }
