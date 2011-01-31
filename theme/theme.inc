@@ -14,7 +14,7 @@
 function template_preprocess_vcd_row_object(&$vars) {
   $options = $vars['options'];
 
-  if ($plugin = context_get_plugin('reaction', 'vcd_views_context_reaction')) {
+  if (($plugin = context_get_plugin('reaction', 'vcd_views_context_reaction')) && $options['contextual']) {
     // We need to call all contextual conditions here. Context module invokes them through
     // context_page_alter() which is after Views' preprocess functions have been called.
     // This is not necessarily bad because Context loads them in a static cached object.

@@ -46,6 +46,14 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
+
+    // Set an extra fieldset
+    $form['context_fieldset']['contextual'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable context switching.'),
+      '#description' => t('Enabling contextual switching only overrides the Default Build Mode for this view.'),
+      '#default_value' => ($this->options['contextual']) ? $this->options['contextual'] : FALSE,
+    );
     
     // List all enabled contexts that load the vcd_views_context_reaction plugin
     $contexts = context_enabled_contexts();
