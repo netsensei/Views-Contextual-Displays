@@ -77,6 +77,7 @@ class views_plugin_row_vcd extends views_plugin_ds_object_view {
    * Reset all fieldsets except for changing.
    */
 	function options_submit($form, &$form_state) {
+    parent::options_submit($form, $form_state);
     foreach ($form_state['values']['row_options']['context_fieldset'] as $context => $buildmode) {
       $form_state['values']['row_options'][$context] = $buildmode;
     }
